@@ -32,6 +32,58 @@ const resolvers: IResolvers = {
         console.log(error);
       }
     },
+    offers: async (_, args) => {
+      try {
+        const {
+          page = 1,
+          limit = 3,
+          priceMin = 0,
+          priceMax = Infinity,
+          sort = "descDate",
+          search = "",
+        } = args;
+
+        let sortArg;
+        switch (sort) {
+          case "ascDate":
+            sortArg = { date: "asc" };
+            break;
+          case "descDate":
+            sortArg = { date: "desc" };
+            break;
+          case "ascPrice":
+            sortArg = { price: "asc" };
+            break;
+          case "descPrice":
+            sortArg = { price: "desc" };
+            break;
+        }
+
+        const query = {
+          $or: [
+            {
+              price: { $gte: priceMin, $lte: priceMax },
+              title: RegExp(search, "i"),
+            },
+            {
+              price: { $gte: priceMin, $lte: priceMax },
+              description: RegExp(search, "i"),
+            },
+          ],
+        };
+
+        const result = await Offer.find(query)
+          .sort(sortArg)
+          .skip(limit * (page - 1))
+          .limit(limit)
+          .lean(true);
+
+        const count = await Offer.find(query).countDocuments();
+        return { result, count };
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   Mutation: {
     register: async (_, args) => {

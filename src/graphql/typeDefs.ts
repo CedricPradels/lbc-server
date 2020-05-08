@@ -18,9 +18,22 @@ export default gql`
     id: ID
   }
 
+  type Offers {
+    result: [Offer]
+    count: Int
+  }
+
   type Query {
     login(email: String!, password: String!): User
     offer(id: ID): Offer
+    offers(
+      page: Int
+      limit: Int
+      priceMin: Int
+      priceMax: Int
+      search: String
+      sort: String # "ascPrice" | "desPrice" |  "ascDate" | "desDate"
+    ): Offers
   }
   type Mutation {
     register(email: String!, alias: String, password: String!): User
