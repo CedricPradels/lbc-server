@@ -5,11 +5,15 @@
   "author": "CedricPradels <cedric.pradels@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/crypto-js": "^3.1.45",
     "@types/mongoose": "^5.7.15",
+    "@types/randomstring": "^1.1.6",
     "apollo-server": "^2.13.0",
+    "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "mongoose": "^5.9.12",
+    "randomstring": "^1.1.5",
     "ts-node": "^8.10.1",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
