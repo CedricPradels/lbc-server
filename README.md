@@ -14,3 +14,5 @@ Use/learn graphQL / Apollo Server for :
 
 - Find how to add types to resolvers
 - Add cloudinary service to store pictures
+- Add error handle
+- improve authentication flow (with [Apollo Server Doc](https://www.apollographql.com/docs/apollo-server/security/authentication/))
