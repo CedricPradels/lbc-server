@@ -74,6 +74,19 @@ const resolvers: IResolvers = {
         console.log(error);
       }
     },
+    delete: async (_, args) => {
+      try {
+        const { id, token } = args;
+
+        const queryUser = await User.findOne({ token }).lean(true);
+        if (!queryUser) throw "Wrong token";
+        const dealer = queryUser._id;
+        const deletedOffer = await Offer.findOneAndDelete({ dealer, _id: id });
+        return deletedOffer;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 

@@ -31,5 +31,6 @@ export default gql`
       pictures: [String]
       token: String
     ): Offer
+    delete(id: ID, token: String): Offer
   }
 `;
