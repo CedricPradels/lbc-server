@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Offer from "../models/Offer";
 
 import { createAuthentication, checkPassword } from "../helpers/authentication";
 import { passwordP, emailP } from "../helpers/predicates";
@@ -35,6 +36,29 @@ const resolvers: IResolvers = {
 
         const newUser = await User.create({ alias, email, ...authentication });
         return newUser;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    publish: async (_, args) => {
+      try {
+        const { pictures, title, price, description, token } = args;
+
+        const queryUser = await User.findOne({ token }).lean(true);
+
+        if (!queryUser) throw "Invalid token";
+        const dealer = queryUser._id;
+
+        const date = Date.now().toString();
+        const newOffer = await Offer.create({
+          title,
+          description,
+          price,
+          date,
+          pictures,
+          dealer,
+        });
+        return newOffer;
       } catch (error) {
         console.log(error);
       }
