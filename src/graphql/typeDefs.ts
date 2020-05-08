@@ -15,10 +15,12 @@ export default gql`
     date: String #ADD SCALAR
     description: String
     dealer: String
+    id: ID
   }
 
   type Query {
     login(email: String!, password: String!): User
+    offer(id: ID): Offer
   }
   type Mutation {
     register(email: String!, alias: String, password: String!): User

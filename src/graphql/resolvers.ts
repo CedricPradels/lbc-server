@@ -21,6 +21,17 @@ const resolvers: IResolvers = {
         console.log(error);
       }
     },
+    offer: async (_, args) => {
+      try {
+        const id = args.id;
+        const queryOffer = await Offer.findById(id);
+        if (!queryOffer) throw "Offer not found";
+
+        return queryOffer;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   Mutation: {
     register: async (_, args) => {
