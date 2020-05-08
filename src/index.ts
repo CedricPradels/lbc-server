@@ -13,7 +13,12 @@ mongoose.connect(String(process.env.MONGODB_URI), {
 const db = mongoose.connection;
 db.once("open", () => console.log("DB connected"));
 
-const server = new ApolloServer({ typeDefs, resolvers, playground: true });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+  introspection: true,
+});
 
 server
   .listen(process.env.PORT)
