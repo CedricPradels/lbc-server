@@ -39,7 +39,7 @@ export default gql`
     register(email: String!, alias: String, password: String!): User
     publish(
       title: String
-      descrition: String
+      description: String
       price: Int
       pictures: [String]
       token: String
