@@ -57,6 +57,8 @@ const resolvers: IResolvers = {
           case "descPrice":
             sortArg = { price: "desc" };
             break;
+          default:
+            sortArg = { date: "desc" };
         }
 
         const query = {
@@ -75,8 +77,7 @@ const resolvers: IResolvers = {
         const result = await Offer.find(query)
           .sort(sortArg)
           .skip(limit * (page - 1))
-          .limit(limit)
-          .lean(true);
+          .limit(limit);
 
         const count = await Offer.find(query).countDocuments();
         return { result, count };
