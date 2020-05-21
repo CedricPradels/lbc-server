@@ -24,7 +24,10 @@ const resolvers: IResolvers = {
     offer: async (_, args) => {
       try {
         const id = args.id;
-        const queryOffer = await Offer.findById(id);
+        const queryOffer = await Offer.findById(id).populate({
+          path: "dealer",
+          select: "alias",
+        });
         if (!queryOffer) throw "Offer not found";
 
         return queryOffer;

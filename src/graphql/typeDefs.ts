@@ -14,7 +14,7 @@ export default gql`
     price: Int
     date: String #ADD SCALAR
     description: String
-    dealer: String
+    dealer: User
     id: ID
   }
 
