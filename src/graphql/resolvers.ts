@@ -24,13 +24,25 @@ const resolvers: IResolvers = {
     offer: async (_, args) => {
       try {
         const id = args.id;
-        const queryOffer = await Offer.findById(id).populate({
-          path: "dealer",
-          select: "alias",
-        });
+        const queryOffer = await Offer.findById(id).lean(true);
+
         if (!queryOffer) throw "Offer not found";
 
-        return queryOffer;
+        const offersCount = await Offer.estimatedDocumentCount({
+          dealer: queryOffer.dealer,
+        });
+
+        const queryDealer = await User.findById(queryOffer.dealer);
+
+        const result = {
+          ...queryOffer,
+          dealer: {
+            offersCount,
+            alias: queryDealer ? queryDealer.alias : null,
+          },
+        };
+
+        return result;
       } catch (error) {
         console.log(error);
       }

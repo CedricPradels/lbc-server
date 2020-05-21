@@ -7,6 +7,11 @@ export default gql`
     token: String
   }
 
+  type Dealer {
+    alias: String
+    offersCount: Int
+  }
+
   # scalar Date
   type Offer {
     pictures: [String]
@@ -14,7 +19,7 @@ export default gql`
     price: Int
     date: String #ADD SCALAR
     description: String
-    dealer: User
+    dealer: Dealer
     id: ID
   }
 
