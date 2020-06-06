@@ -8,7 +8,7 @@
     "@types/crypto-js": "^3.1.45",
     "@types/mongoose": "^5.7.15",
     "@types/randomstring": "^1.1.6",
-    "apollo-server": "^2.13.0",
+    "apollo-server": "^2.14.2",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
